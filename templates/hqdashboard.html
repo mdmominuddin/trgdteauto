@@ -1,7 +1,159 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-<h2 class="display">Jt Trg</h2></h2>
+{% load static %}
+<style>
+   body{
+    background-image:none;
+    background-color:#011626;
+    color:white;
+    }
+</style>
+
+  <div class="container mt-5">
+    <!-- Alert indicating the application is under development -->
+    <div class="alert alert-warning" role="alert">
+      <strong>Under Development:</strong> This application is currently under development.
+    </div>
+
+    <!-- Page Header -->
+    <h2 class="display-4">HQ Trg Dte</h2>
+
+    <!-- Navigation Links -->
+    <nav class="nav mt-4">
+      <a class="nav-link" href="#list-of-officers">List of Officers</a>
+      <a class="nav-link" href="#list-of-staffs">List of Staffs</a>
+      <a class="nav-link" href="#list-of-files">List of Files</a>
+      <a class="nav-link" href="#policy-letters">Policy Letters</a>
+      <a class="nav-link" href="#accounts">Accounts</a>
+      <a class="nav-link" href="#states">States</a>
+      <a class="nav-link" href="#expenditure-states">Expenditure States</a>
+      <a class="nav-link" href="#add-expenditure">Add Expenditure</a>
+    </nav>
+
+    <!-- Dummy Content - Replace with your actual content -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <h3>Training Courses</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Instructor</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Basic Training</td>
+              <td>John Doe</td>
+              <td>Training Center A</td>
+            </tr>
+            <tr>
+              <td>Advanced Leadership</td>
+              <td>Jane Smith</td>
+              <td>Training Center B</td>
+            </tr>
+            <tr>
+              <td>Tactical Operations</td>
+              <td>Bob Johnson</td>
+              <td>Training Center C</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3>Upcoming Events</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Annual Training Camp</td>
+              <td>2024-07-15</td>
+              <td>Camp Site A</td>
+            </tr>
+            <tr>
+              <td>Leadership Seminar</td>
+              <td>2024-08-20</td>
+              <td>Seminar Hall B</td>
+            </tr>
+            <tr>
+              <td>Special Operations Workshop</td>
+              <td>2024-09-10</td>
+              <td>Workshop Center C</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Additional Dummy Content -->
+    <div class="mt-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac velit vel metus consectetur fermentum a ac justo.</p>
+      <p>Nullam euismod eu odio vel condimentum. Sed consectetur velit vel ex semper, nec pharetra odio venenatis.</p>
+    </div>
+
+    <!-- Dummy Tables for Current States -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <h3>Current States of Course Abroad</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Advanced Leadership</td>
+              <td>Foreign Country A</td>
+              <td>In Progress</td>
+            </tr>
+            <tr>
+              <td>Tactical Operations</td>
+              <td>Foreign Country B</td>
+              <td>Completed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3>Current States of Foreign Armies in BD</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Army</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Foreign Army X</td>
+              <td>Bangladesh</td>
+              <td>On Duty</td>
+            </tr>
+            <tr>
+              <td>Foreign Army Y</td>
+              <td>Bangladesh</td>
+              <td>On Training</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+      <p>&copy; 2024 HQ AFD TRG Dte. All rights reserved.</p>
+    </footer>
+  </div>
 {% endblock %}
