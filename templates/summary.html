@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    body {
+        background-image: none;
+        color: #fff;
+        padding-top: 20px;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        background-color: #024720!important;
+        padding: 20px;
+        border-radius: 5px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar h4 {
+        color: #fff; /* Added text color for the sidebar heading */
+    }
+
+    .sidebar a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 0;
+        transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #495057;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .course-offer-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .course-offer-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333; /* Adjusted label color for better contrast */
+    }
+
+    .course-offer-form input,
+    .course-offer-form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    .course-offer-form button {
+        background-color: #0275d8;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .course-offer-form button:hover {
+        background-color: #025aa5;
+    }
+
+    /* Adjusted spacing for the table */
+    .table {
+        margin-top: 20px;
+    }
+
+    .filter-dropdown {
+        margin-bottom: 12px;
+    }
+
+    .dark-overlay {
+        display: none; /* Hide the overlay */
+    }
+</style>
+
+<div class="container-fluid">
+   <h1>summary</h1>
+
+{% endblock %}

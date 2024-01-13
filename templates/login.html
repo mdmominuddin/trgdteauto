@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+    body {
+        background-image: none;
+        background-color: #4545;
+    }
+
+    .dark-overlay {
+        display: none;
+    }
+
+    .custom-card {
+        background-color: #0000;
+        border: 1px solid #aaa;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.2rem;
+        background-color: #013f75;
+        border-radius: 10px;
+        padding: 8px;
+        margin-bottom: 0;
+    }
+
+    .card-text {
+        font-size: 1.1rem;
+    }
+
+    .card-body {
+        background-color: #437863;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .bi {
+        font-size: 2rem;
+        color: white;
+        padding: 15px;
+        background-color: #4d8deb;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .custom-card:hover .bi {
+        background-color: #66011c;
+    }
+
+    /* Footer styles */
+    .footer {
+        text-align: center;
+        padding: 10px;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        height: 75px;
+        width: 100%;
+    }
+
+    .footer p {
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 custom-card text-center mt-1">
+                <i class="bi bi-house-door"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> HQ Trg Dte </h5>
+                    <p class="pt-3"> <b> - - - </b></p>
+                    <p class="card-text text-dark text-bold text-bordered" style="font-size: 1.1rem;">
+                        This section deals with Administrative, Accounts, Wellfare, etc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-5">
+        <!-- Login form -->
+        <div class="col-md-6 offset-md-3">
+            <h2>Login</h2>
+            <form method="post" action="{% url 'armytrg' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="footer bg-dark rounded p-3 mt-2 text-secondary">
+            <p>@Warrant Officer Momin, Cell:01769247455</p>
+            <p>email: mmomin.9108@gmail.com</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

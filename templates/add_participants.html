@@ -1,0 +1,46 @@
+<!-- add_participants.html -->
+{% extends 'base.html' %}
+
+{% block title %}Add Participants{% endblock %}
+
+{% block content %}
+<div class="card border-primary mb-3 mt-5 mx-auto" style="max-width: 400px;">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title">Add Participants</h5>
+    </div>
+    <div class="card-body">
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="mb-3 col-12">
+                {{ form.Service_Number.label_tag }}
+                {{ form.Service_Number }}
+            </div>
+            <div class="mb-3 col-12">
+                {{ form.Rank.label_tag }}
+                {{ form.Rank }}
+            </div>
+            <div class="mb-3 col-12">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="mb-3 col-12">
+                {{ form.svc.label_tag }}
+                {{ form.svc }}
+            </div>
+            <div class="mb-3 col-12">
+                {{ form.govt_order.label_tag }}
+                {{ form.govt_order }}
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Add Participant</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

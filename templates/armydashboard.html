@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    body {
+        background-image: none;
+        color: #fff;
+        padding-top: 20px;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        background-color: #024720!important;
+        padding: 20px;
+        border-radius: 5px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar h4 {
+        color: #fff; /* Added text color for the sidebar heading */
+    }
+
+    .sidebar a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 0;
+        transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #495057;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .course-offer-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .course-offer-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333; /* Adjusted label color for better contrast */
+    }
+
+    .course-offer-form input,
+    .course-offer-form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    .course-offer-form button {
+        background-color: #0275d8;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .course-offer-form button:hover {
+        background-color: #025aa5;
+    }
+
+    /* Adjusted spacing for the table */
+    .table {
+        margin-top: 20px;
+    }
+
+    .filter-dropdown {
+        margin-bottom: 12px;
+    }
+
+    .dark-overlay {
+        display: none; /* Hide the overlay */
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar bg-dark text-light p-4">
+            <a href="{% url 'addparticipants' %}" class="nav-link text-light bg-dark p-2 rounded mt-5 mb-1 ">Add_Participants</a>
+            <a href="{% url 'add_go' %}" class="nav-link text-light bg-dark p-2 rounded mb-1 ">Add Govt.Order</a>
+            <a href="#" class="nav-link text-light bg-dark p-2 rounded mb-1 ">Add data</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 offset-md-2 main-content">
+            <h2 class="mt-4 text-success text-center p-2 rounded text-uppercase pb-3 ">States of Offers from FF Countries </h2>
+            <table class="table table-bordered bg-light" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>C_category</th>
+                        <th>Course Name</th>
+                        <th>Vacancies Offered</th>
+                        <th>Vacancies Accepted</th>
+                        <th>Vacancies Regretted</th>
+                        <th>Vacancies Distributed</th>
+                        <th>Financial</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ff_tr in ff_trg %}
+                    <tr>
+                        <td>{{ ff_tr.ff_country.name }}</td>
+                        <td>{{ ff_tr.ff_country.country_class }}</td>
+                        <td>{{ ff_tr.event_name.name }}</td>
+                        <td>{{ ff_tr.vac_offered }}</td>
+                        <td>{{ ff_tr.vac_accepted }}</td>
+                        <td>{{ ff_tr.vac_regretted }}</td>
+                        <td>
+                            {% for distribution in ff_tr.vacancydistribution_set.all %}
+                                {{ distribution.svc.name }}-{{ distribution.vacancies_allocated }}
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ ff_tr.financial }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ total_offered }}</td>
+                        <td>{{ total_accepted }}</td>
+                        <td>{{ total_regretted }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary btn-sm"> Print </button>
+<div class="mb-5">
+
+</div>
+<div class="col-md-10 offset-md-2 main-content">
+    <h2 class="mt-4 text-success text-center p-2 rounded text-uppercase pb-3 ">States of Government Order </h2>
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>GO Number</th>
+                <th>GO Pub Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Days Involved</th>
+                <th>Country</th>
+                <th>Service</th>
+                <th>Participants</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for govt_order in govt_orders_and_participants %}
+                <tr>
+                    <td>{{ govt_order.event_name }}</td>
+                    <td>{{ govt_order.go_number }}</td>
+                    <td>{{ govt_order.go_pub_date }}</td>
+                    <td>{{ govt_order.start_date }}</td>
+                    <td>{{ govt_order.end_date }}</td>
+                    <td>{{ govt_order.days_involved }}</td>
+                    <td>{{ govt_order.country }}</td>
+                    <td>{{ govt_order.svc }}</td>
+                    <td>
+                        {% for participant in govt_order.participants.all %}
+                        {{ participant.name }},
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if govt_order.govt_order_document %}
+                            <a href="{{ govt_order.govt_order_document.url }}" target="_blank">View Document</a>
+                        {% else %}
+                            No Document
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

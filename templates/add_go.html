@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Govt Order and Participants {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    body {
+        background-image:none;
+        background-color: black;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-button {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+        background-color: #0056b3;
+    }
+
+    .card {
+        width: 50%;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .card:not(:last-child) {
+        margin-right: 2%; /* Add margin to the right of all cards except the last one */
+    }
+
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
+<div class="container-fluid text-center">
+    <i class="bi bi-mortarboard-fill text-success" style="font-size: 500%; "></i>
+</div>
+<div class="container">
+
+
+    <div class="card border-info ml-1">
+        <div class="card-header bg-success">
+            <h5 class="card-title ">Add Govt Order</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                <div class="mb-3 col-12">
+                    {{ form1.event_name.label_tag }}
+                    {{ form1.event_name }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.go_number.label_tag }}
+                    {{ form1.go_number }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.go_pub_date.label_tag }}
+                    {{ form1.go_pub_date }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.start_date.label_tag }}
+                    {{ form1.start_date }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.end_date.label_tag }}
+                    {{ form1.end_date }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.days_involved.label_tag }}
+                    {{ form1.days_involved }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.govt_order_document.label_tag }}
+                    {{ form1.govt_order_document }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.country.label_tag }}
+                    {{ form1.country }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form1.svc.label_tag }}
+                    {{ form1.svc }}
+                </div>
+                <!-- Add other form1 fields here -->
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Save Govt Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+   <div class="card border-primary">
+        <div class="card-header bg-success">
+            <h5 class="card-title">Add Participants</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                <div class="mb-3 col-12">
+                    {{ form2.Service_Number.label_tag }}
+                    {{ form2.Service_Number }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form2.Rank.label_tag }}
+                    {{ form2.Rank }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form2.name.label_tag }}
+                    {{ form2.name }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form2.svc.label_tag }}
+                    {{ form2.svc }}
+                </div>
+                <div class="mb-3 col-12">
+                    {{ form2.govt_order.label_tag }}
+                    {{ form2.govt_order }}
+                    <!-- Populate govt_order dropdown with choices from form1.go_number -->
+                    {% with form1.go_number.choices as govt_order_choices %}
+                        {% for choice in govt_order_choices %}
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+                <!-- Add other form2 fields here -->
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Save Participant</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <a href="{% url 'armytrg' %}" class="btn btn-danger border border-info back-button">
+        <i class="bi bi-skip-backward"></i> Back
+    </a>
+</div>
+
+{% endblock %}
+
